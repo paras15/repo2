@@ -1,0 +1,49 @@
+CREATE TABLE tbl_user (
+    id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(128) NOT NULL,
+    password VARCHAR(128) NOT NULL,
+    salt VARCHAR(128) NOT NULL,
+    email VARCHAR(128) NOT NULL,
+    profile VARCHAR(128) NOT NULL) ENGINE=INNODB;
+
+INSERT INTO tbl_user (username, password, email) VALUES ('test1', 'pass1', 'test1@example.com');
+
+
+CREATE TABLE tbl_post (
+    id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(128) NOT NULL,
+    content VARCHAR(512) NOT NULL,
+    tags VARCHAR(128) NOT NULL,
+    status INTEGER(16) NOT NULL,
+    create_time VARCHAR(128) NOT NULL,
+    update_time VARCHAR(128) NOT NULL,
+    author_id INTEGER(128) NOT NULL,
+    FOREIGN KEY (author_id) REFERENCES tbl_user(id) ON DELETE CASCADE) ENGINE=INNODB;
+
+CREATE TABLE tbl_tag (
+    id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(128) NOT NULL,
+    frequency INTEGER(100) NOT NULL
+    
+);
+
+CREATE TABLE tbl_lookup (
+    id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(128) NOT NULL,
+    code VARCHAR(128) NOT NULL,
+    type VARCHAR(128) NOT NULL,
+    position VARCHAR(128) NOT NULL
+);
+
+
+CREATE TABLE tbl_comment (
+    id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    content VARCHAR(512) NOT NULL,
+	status INTEGER(16) NOT NULL,
+	create_time VARCHAR(128) NOT NULL,
+	author VARCHAR(128) NOT NULL,
+	email VARCHAR(128) NOT NULL,
+	url VARCHAR(128) NOT NULL,
+	post_id INTEGER(128) NOT NULL,
+	FOREIGN KEY (post_id) REFERENCES tbl_post(id) ON DELETE CASCADE) ENGINE=INNODB;
+
